@@ -1,9 +1,3 @@
-<%-- 
-    Document   : admission
-    Created on : Jan 21, 2016, 9:24:03 PM
-    Author     : mukesh
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
