@@ -26,6 +26,27 @@
                 <td>Student Hobby</td>
                 <td>${student.studenthobby}</td>
             </tr>
+            <tr>
+                <td>Student Phone</td>
+                <td>${student.phone}</td>
+            </tr>
+            <tr>
+                <td>Student DOB</td>
+                <td>${student.dob}</td>
+            </tr>
+            <tr>
+                <td>Student Skills</td>
+                <td>${student.studentskills}</td>
+            </tr>
+            <tr>
+                <td>Student Address</td>
+                <td>State :${student.studentadress.state}</td>
+                <td>City:${student.studentadress.city}</td>
+                <td>Street:${student.studentadress.street}</td>
+                <td>Zip:${student.studentadress.pincode}</td>
+            </tr>
           </table>
+
+    
     </body>
 </html>
