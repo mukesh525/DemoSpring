@@ -1,37 +1,51 @@
 package com.muk.controller;
 
-import Pogo.Student;
-import java.util.Map;
+import com.muk.entity.Student;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class StudentAdmission {
-    
-   @ModelAttribute
-    public void CommonMethod(Model model){
-       model.addAttribute("msg", "Engeenring college in India"); 
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+      //  binder.setDisallowedFields(new String[]{"phone"});
+        binder.registerCustomEditor(String.class, "studentname", new StudentNameEditor());
+
     }
-    
-    @RequestMapping(value = "/abc",method = RequestMethod.GET)
-    public ModelAndView getAdmissionForm(){
-        ModelAndView mav=new ModelAndView("admission");
+
+    @ModelAttribute
+    public void CommonMethod(Model model) {
+        model.addAttribute("msg", "Engeenring college in India");
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView getAdmissionForm() {
+        ModelAndView mav = new ModelAndView("admission");
         return mav;
-    
+
     }
-    
-     @RequestMapping(value = "/SubmitAdmissionForm",method = RequestMethod.POST)
-     public ModelAndView submitAdmissionForm(@ModelAttribute("student")Student student){
-        ModelAndView mav=new ModelAndView("admissionsucess");
-       // mav.addObject("msg", "Engeenring college");
-        return mav;
-    
+
+    @RequestMapping(value = "/SubmitAdmissionForm", method = RequestMethod.POST)
+    public ModelAndView submitAdmissionForm(@Valid @ModelAttribute("student") Student student, BindingResult result) {
+
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("admission");
+            return mav;
+        } else {
+
+            ModelAndView mav = new ModelAndView("admissionsucess");
+            return mav;
+        }
+
     }
-    
-    
+
 }
